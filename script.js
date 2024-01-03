@@ -1,8 +1,10 @@
-document.getElementById('puzzleForm').addEventListener('submit', async (e)=> {
-    e.preventDefault();
-    var complexity = document.getElementById('complexity').value;
+
+// document.getElementById('puzzleForm').addEventListener('submit', async (e)=> {
+    // e.preventDefault();
+    // var complexity = document.getElementById('complexity').value;
     // var wordCount = document.getElementById('wordCount').value;
     // var gridSize = document.getElementById('gridSize').value;
+    var complexity = 'easy';
     var wordCount = '15';
     var gridSize = '15x15';
     // generate table 
@@ -636,7 +638,7 @@ const downData = [
       `;
     table += puzzleTable + solutionTable + `
     <div class="action">
-      <span onclick="window.print()"> PRINT </span>
+      <span onclick="generatePDF()"> PRINT </span>
       <span id="reveal"> REVEAL </span>
       <span id="hide"> HIDE </span>
       </div>
@@ -671,8 +673,20 @@ const downData = [
         document.getElementById('solutionTable').style.display = 'none';
       }
 
- });
+//  });
  
+ function generatePDF() {
+  // Choose the element that your content will be rendered to.
+  const element = document.getElementById('puzzleTable');
+  // Choose the element and save the PDF for your user.
+  var options = {
+    filename: 'sample.pdf',
+    margin: 10,
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
+  };
+  html2pdf().set(options).from(element).save();
+  window.open('file:///Users/2403148/Downloads/sample.pdf')
+}
 
 //  document.getElementById('showSolution').addEventListener('click', function() {
     // Implement the logic to show the puzzle solution
